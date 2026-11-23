@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysiX </title>
+  <!-- <link rel="icon" type="image/jpeg" href="/logo.jpg"> -->
+  <link rel="apple-touch-icon" href="/logo.jpg">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <!-- Google Fonts: Inter, Cairo, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <!-- Top Application Bar -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-icon"><img src="images/physiX.jpeg" alt="PhysiX Logo" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+        <div class="brand-text">
+          <span class="brand-title" data-i18n="brand_name">PhysiX </span>
+          <span class="brand-subtitle" data-i18n="brand_sub">PhysiX</span>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="lab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v6l-4.5 9A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.8-3L15 9V3"></path><path d="M9 9h6"></path></svg>
+          <span data-i18n="nav_lab">Interactive Labs</span>
+        </button>
+        <button class="nav-tab" data-tab="solver">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M8 12h8M12 8v8"></path></svg>
+          <span data-i18n="nav_solver">Smart Solver</span>
+        </button>
+        <button class="nav-tab" data-tab="exam">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span data-i18n="nav_exam">Practical Exam</span>
+        </button>
+        <button class="nav-tab" data-tab="instructor">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span data-i18n="nav_instructor">Instructor Portal</span>
+        </button>
+        <button class="nav-tab" data-tab="vision">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          <span data-i18n="nav_vision">Vision OCR</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Header Right Controls -->
+    <div class="header-right">
+      <!-- Star Counter Summary -->
+      <div class="star-badge" title="Total Stars Earned">
+        <span class="star-icon">★</span>
+        <span id="totalStarsCount">0</span>
+        <span class="star-max">/ 18</span>
+      </div>
+
+      <!-- Theme Switcher -->
+      <button class="icon-btn" id="themeToggle" title="Toggle Blueprint / Paper Mode">
+        <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg id="themeIconMoon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+
+      <!-- Language Switcher -->
+      <button class="pill-btn" id="langToggle" title="Switch Language / تبديل اللغة">
+        <span id="langLabel">العربية</span>
+      </button>
+
+      <!-- User Profile & Login Button --> 
+      <div class="user-pill" id="userPill">
+        <button class="btn btn-secondary btn-sm" id="loginBtn" data-i18n="btn_login" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span data-i18n="auth_login">Sign In</span>
+        </button>
+        <div class="logged-in-box" id="loggedInBox" style="display:none;">
+          <span class="user-avatar" id="userAvatar">S</span>
+          <div class="user-meta">
+            <span class="user-name" id="userNameLabel">Student</span>
+            <span class="user-role-badge" id="userRoleBadge">STUDENT</span>
+          </div>
+          <button class="btn btn-outline btn-sm btn-logout" id="logoutBtn" title="Sign Out / تسجيل الخروج">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span data-i18n="btn_logout">Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-main">
+
+    <!-- ============================================================= -->
+    <!-- TAB 1: INTERACTIVE LABS (6 Curriculum Modules) -->
+    <!-- ============================================================= -->
+    <section class="tab-pane active" id="pane-lab">
+      <!-- Module Selector Bar -->
+      <div class="module-selector-bar">
+        <div class="module-chips" id="moduleChips">
+          <button class="module-chip active" data-module="newton">
+            <span class="chip-num">01</span>
+            <span class="chip-title" data-i18n="mod_newton">Newton's Laws</span>
+            <span class="chip-stars" id="chipStars-newton">★ 0/3</span>
+          </button>
+          <button class="module-chip" data-module="vectors">
+            <span class="chip-num">02</span>
+            <span class="chip-title" data-i18n="mod_vectors">Vectors & Resultant</span>
+            <span class="chip-stars" id="chipStars-vectors">★ 0/3</span>
+          </button>
+          <button class="module-chip" data-module="equilibrium">
+            <span class="chip-num">03</span>
+            <span class="chip-title" data-i18n="mod_equilibrium">Force Equilibrium</span>
+            <span class="chip-stars" id="chipStars-equilibrium">★ 0/3</span>
+          </button>
+          <button class="module-chip" data-module="projectiles">
+            <span class="chip-num">04</span>
+            <span class="chip-title" data-i18n="mod_projectiles">Projectile Motion</span>
+            <span class="chip-stars" id="chipStars-projectiles">★ 0/3</span>
+          </button>
+          <button class="module-chip" data-module="inclined_plane">
+            <span class="chip-num">05</span>
+            <span class="chip-title" data-i18n="mod_inclined">Inclined Plane & Friction</span>
+            <span class="chip-stars" id="chipStars-inclined_plane">★ 0/3</span>
+          </button>
+          <button class="module-chip" data-module="momentum">
+            <span class="chip-num">06</span>
+            <span class="chip-title" data-i18n="mod_momentum">Collisions & Momentum</span>
+            <span class="chip-stars" id="chipStars-momentum">★ 0/3</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Level & Mission Header -->
+      <div class="mission-banner">
+        <div class="mission-info">
+          <div class="mission-tags">
+            <span class="badge badge-primary" id="missionLevelBadge">Level 1: Fundamentals</span>
+            <span class="badge badge-outline" id="missionStatusBadge">Target: Pending</span>
+          </div>
+          <h2 class="mission-title" id="missionTitle">Calibrate Force to Stop Within Target Arrival Window</h2>
+          <p class="mission-desc" id="missionDesc">Apply acceleration $a = F/m$ to slide the mass $m$ across distance $D$ into the green target sensor.</p>
+        </div>
+        <div class="mission-actions">
+          <div class="level-stars-display" id="currentLevelStars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <button class="btn btn-ai" id="aiTutorBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 12L2.1 12.1"></path><path d="M12 12L19 19"></path></svg>
+            <span data-i18n="btn_ai_tutor">Explain Solution with AI</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Workspace Grid: Canvas + Controls -->
+      <div class="lab-workspace">
+        <!-- Canvas Container with Vector Grid Background -->
+        <div class="simulation-viewport">
+          <div class="canvas-header-hud">
+            <div class="hud-item">
+              <span class="hud-label" data-i18n="hud_time">Time (t)</span>
+              <span class="hud-val" id="hudTime">0.00 s</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label" data-i18n="hud_vel">Velocity (v)</span>
+              <span class="hud-val" id="hudVelocity">0.00 m/s</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label" data-i18n="hud_acc">Accel (a)</span>
+              <span class="hud-val" id="hudAccel">0.00 m/s²</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label" data-i18n="hud_pos">Position (s)</span>
+              <span class="hud-val" id="hudPos">0.00 m</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label" data-i18n="hud_energy">Kinetic Energy</span>
+              <span class="hud-val" id="hudEnergy">0.0 J</span>
+            </div>
+          </div>
+
+          <!-- Main Interactive Physics Canvas -->
+          <div class="canvas-wrapper">
+            <canvas id="simCanvas" width="920" height="420"></canvas>
+            <div class="canvas-watermark">PhysiX Lab • Vector Mechanics Engine</div>
+          </div>
+
+          <!-- Simulation Execution Controls -->
+          <div class="sim-controls-bar">
+            <div class="control-group">
+              <button class="btn btn-primary" id="runSimBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span data-i18n="btn_run">Run Simulation</span>
+              </button>
+              <button class="btn btn-outline" id="pauseSimBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                <span data-i18n="btn_pause">Pause</span>
+              </button>
+              <button class="btn btn-secondary" id="resetSimBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v6h6"></path><path d="M21 12A9 9 0 0 0 6 5.3L3 8"></path></svg>
+                <span data-i18n="btn_reset">Reset</span>
+              </button>
+            </div>
+            <div class="speed-control">
+              <span class="text-subtle" data-i18n="sim_speed">Speed:</span>
+              <button class="btn-chip" data-speed="0.5">0.5x</button>
+              <button class="btn-chip active" data-speed="1.0">1.0x</button>
+              <button class="btn-chip" data-speed="2.0">2.0x</button>
+            </div>
+          </div>
+
+          <!-- Live Telemetry Charts (v-t & s-t) -->
+          <div class="telemetry-panel">
+            <div class="telemetry-header">
+              <div class="telemetry-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <span data-i18n="telemetry_title">Real-Time Telemetry: Velocity (v-t) & Displacement (s-t)</span>
+              </div>
+              <div class="chart-legend">
+                <span class="legend-item"><span class="legend-color legend-blue"></span> v(t) [m/s]</span>
+                <span class="legend-item"><span class="legend-color legend-emerald"></span> s(t) [m]</span>
+              </div>
+            </div>
+            <canvas id="telemetryCanvas" width="920" height="130"></canvas>
+          </div>
+        </div>
+
+        <!-- Sidebar Parameter Inspector -->
+        <aside class="lab-sidebar">
+          <div class="sidebar-card">
+            <div class="card-header">
+              <h3 data-i18n="params_title">Experimental Controls</h3>
+              <span class="badge badge-secondary" id="activeModuleBadge">Newton</span>
+            </div>
+
+            <div class="controls-form" id="dynamicControlsForm">
+              <!-- Controls are injected dynamically per active module -->
+            </div>
+
+            <!-- Mathematical Formulation Readout -->
+            <div class="formula-box" id="moduleFormulaBox">
+              <span class="formula-label" data-i18n="governing_eq">Governing Formulation:</span>
+              <div class="formula-math" id="formulaMathDisplay">a = F / m</div>
+            </div>
+
+            <!-- Quick Level Progression -->
+            <div class="level-nav-box">
+              <div class="level-nav-header">
+                <span data-i18n="level_select">Level Progression:</span>
+                <span id="levelLabel">Level 1 / 3</span>
+              </div>
+              <div class="level-dots" id="levelDots">
+                <button class="level-dot active" data-lvl="1">1</button>
+                <button class="level-dot" data-lvl="2">2</button>
+                <button class="level-dot" data-lvl="3">3</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- TAB 2: SMART INVERSE & FORWARD EQUATION SOLVER -->
+    <!-- ============================================================= -->
+    <section class="tab-pane" id="pane-solver">
+      <div class="section-container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" data-i18n="solver_header">المعمل العكسي وحلال المعادلات الذكي</h2>
+            <p class="section-subtitle" data-i18n="solver_sub">Enter your known mechanics parameters and leave any single target variable empty to solve algebraically and simulate instantly.</p>
+          </div>
+          <button class="btn btn-secondary" id="solverQuickSampleBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1"></rect></svg>
+            <span data-i18n="solver_load_sample">Load Textbook Example</span>
+          </button>
+        </div>
+
+        <div class="solver-grid">
+          <!-- Solver Left Inputs -->
+          <div class="solver-card">
+            <div class="card-header">
+              <h3 data-i18n="solver_config">Select Physics Discipline</h3>
+            </div>
+            
+            <div class="form-group">
+              <label data-i18n="solver_topic_label">Mechanics Topic:</label>
+              <select class="form-select" id="solverTopicSelect">
+                <option value="kinematics">Linear Kinematics & Newton's 2nd Law</option>
+                <option value="projectile">2D Projectile Motion & Parabolic Trajectory</option>
+                <option value="inclined_plane">Inclined Plane with Static/Kinetic Friction</option>
+                <option value="forces">Vector Addition & Force Resultants</option>
+                <option value="momentum">Conservation of Linear Momentum & Restitution</option>
+              </select>
+            </div>
+
+            <div class="solver-inputs-container" id="solverInputsContainer">
+              <!-- Dynamically populated variable fields based on topic -->
+            </div>
+
+            <div class="solver-actions">
+              <button class="btn btn-primary btn-block" id="executeSolveBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                <span data-i18n="btn_solve_unknown">Solve Algebraic Derivation</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Solver Right Output & Interactive Derivation -->
+          <div class="solver-card solver-output-card">
+            <div class="card-header">
+              <h3 data-i18n="derivation_steps">Step-by-Step Algebraic Solution</h3>
+              <span class="badge badge-success" id="solveStatusBadge" style="display:none;">Solved</span>
+            </div>
+
+            <div class="derivation-body" id="derivationBody">
+              <div class="empty-state">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"></rect><line x1="8" y1="12" x2="16" y2="12"></line><line x1="12" y1="8" x2="12" y2="16"></line></svg>
+                <p data-i18n="solver_empty_prompt">Select your mechanics topic, input known parameters, leave the target unknown empty, and click Solve.</p>
+              </div>
+            </div>
+
+            <div class="solver-simulation-cta" id="solverSimulateCta" style="display:none;">
+              <button class="btn btn-emerald btn-block" id="loadIntoSimBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span data-i18n="btn_simulate_solution">Load Solved Parameters Into Simulation & Run</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- TAB 3: STUDENT PRACTICAL EXAM MODE (Anti-Cheat Lab Sheet) -->
+    <!-- ============================================================= -->
+    <section class="tab-pane" id="pane-exam">
+      <div class="section-container">
+        <!-- Exam Entry Gate -->
+        <div class="exam-entry-box" id="examEntryBox">
+          <div class="exam-card">
+            <div class="exam-badge">
+              <svg width="2
+             </div>
+            <h2 data-i18n="exam_entry_title">Enter Lab Sheet Code</h2>
+            <p data-i18n="exam_entry_sub">Instructors provide a designated sheet code. Each student receives deterministic anti-cheat randomized numerical parameters.</p>
+
+            <div class="form-group">
+              <label data-i18n="exam_code_label">Sheet Code (e.g. MECH-2026):</label>
+              <input type="text" class="form-input text-center text-bold" id="examCodeInput" placeholder="MECH-2026" value="MECH-2026">
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="exam_student_email">Student Email:</label>
+              <input type="email" class="form-input" id="examStudentEmailInput" placeholder="student@university.edu">
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="exam_student_name">Full Name:</label>
+              <input type="text" class="form-input" id="examStudentNameInput" placeholder="e.g. Sarah Nour / سارة نور">
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg" id="startExamBtn" data-i18n="btn_start_exam">
+              Start Practical Assessment
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Exam Questions View -->
+        <div class="exam-active-sheet" id="examActiveSheet" style="display:none;">
+          <div class="exam-header-banner">
+            <div>
+              <span class="badge badge-primary" id="examCodeBadge">MECH-2026</span>
+              <h2 id="examActiveTitle">General Physics I Practical</h2>
+              <p class="text-subtle" id="examStudentGreeting">Candidate: -</p>
+            </div>
+            <div class="exam-timer-box">
+              <span class="exam-anti-cheat-pill">🛡️ Anti-Cheat Numerical Seed Active</span>
+            </div>
+          </div>
+
+          <!-- Questions Container -->
+          <div class="exam-questions-list" id="examQuestionsList">
+            <!-- Populated via API -->
+          </div>
+
+          <div class="exam-submit-bar">
+            <button class="btn btn-emerald btn-lg" id="submitExamFinalBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span data-i18n="btn_submit_exam">Submit Lab Sheet & Lock Grade</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Exam Result Modal / View -->
+        <div class="exam-result-box" id="examResultBox" style="display:none;">
+          <div class="exam-card text-center">
+            <div class="result-circle" id="resultCircle">
+              <span class="result-score" id="resultScoreVal">92%</span>
+            </div>
+            <h2 id="resultTitle">Assessment Completed</h2>
+            <p id="resultMsg">Your practical lab submission has been permanently recorded in the institutional database.</p>
+            <div class="result-breakdown" id="resultBreakdown"></div>
+            <button class="btn btn-primary" id="returnToLabBtn" data-i18n="btn_return_lab">Return to Interactive Labs</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- TAB 4: B2B INSTRUCTOR PORTAL (لوحة تحكم المعيد) -->
+    <!-- ============================================================= -->
+    <section class="tab-pane" id="pane-instructor">
+      <div class="section-container">
+        <!-- Instructor Top Bar -->
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" data-i18n="instructor_title">Instructor & TA Practical Command Center</h2>
+            <p class="section-subtitle" data-i18n="instructor_sub">Generate randomized anti-cheat lab exam sheets, track cohort analytics, detect curriculum weak spots, and export grade rosters.</p>
+          </div>
+          <button class="btn btn-primary" id="openCreateSheetModalBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span data-i18n="btn_new_sheet">Generate New Lab Sheet</span>
+          </button>
+        </div>
+
+        <!-- Instructor Stats Row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-label" data-i18n="stat_active_sheets">Active Lab Sheets</span>
+            <span class="stat-number" id="statActiveSheets">1</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label" data-i18n="stat_total_submissions">Total Submissions</span>
+            <span class="stat-number" id="statSubmissions">5</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label" data-i18n="stat_class_avg">Cohort Class Average</span>
+            <span class="stat-number" id="statClassAvg">72.0%</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label" data-i18n="stat_pass_rate">Overall Pass Rate</span>
+            <span class="stat-number text-emerald" id="statPassRate">60.0%</span>
+          </div>
+        </div>
+
+        <!-- Inline Live Anti-Cheat Lab Sheet Generator Form -->
+        <div class="instructor-card new-sheet-card">
+          <div class="card-header">
+            <h3 data-i18n="quick_create_sheet">Generate New Anti-Cheat Lab Sheet</h3>
+            <span class="badge badge-primary">B2B Live Deployment</span>
+          </div>
+          <div class="inline-sheet-form">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label data-i18n="label_sheet_code">Unique Sheet Code (e.g. MECH-FALL26):</label>
+                <input type="text" class="form-input text-bold" id="inlineSheetCode" placeholder="MECH-FALL26" value="MECH-FALL26">
+              </div>
+              <div class="form-group">
+                <label data-i18n="label_passing_score">Passing Threshold (%):</label>
+                <input type="number" class="form-input" id="inlineSheetPass" value="65" min="40" max="100">
+              </div>
+            </div>
+            <div class="form-group">
+              <label data-i18n="label_sheet_title">Examination Title:</label>
+              <input type="text" class="form-input" id="inlineSheetTitle" placeholder="Midterm Mechanics Practical Examination" value="Midterm Mechanics Practical Examination">
+            </div>
+            <div class="form-group">
+              <label data-i18n="label_select_topics">Included Physics Topics:</label>
+              <div class="topic-checkboxes">
+                <label><input type="checkbox" name="inlineTopic" value="newton" checked> <span data-i18n="mod_newton">Newton's Laws</span></label>
+                <label><input type="checkbox" name="inlineTopic" value="projectiles" checked> <span data-i18n="mod_projectiles">Projectiles</span></label>
+                <label><input type="checkbox" name="inlineTopic" value="inclined_plane" checked> <span data-i18n="mod_inclined">Inclined Plane</span></label>
+                <label><input type="checkbox" name="inlineTopic" value="vectors" checked> <span data-i18n="mod_vectors">Vectors</span></label>
+              </div>
+            </div>
+            <button class="btn btn-emerald btn-block" id="inlineDeploySheetBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+              <span data-i18n="btn_create_sheet_submit">Deploy Lab Sheet to Database</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cohort Weak Spot Detector & Analytics -->
+        <div class="instructor-grid">
+          <!-- Left: Weak Spots & Cohort Diagnostics -->
+          <div class="instructor-card">
+            <div class="card-header">
+              <h3 data-i18n="analytics_weak_spots">Curriculum Weak-Spot Detection</h3>
+              <span class="badge badge-warning">AI Diagnostic</span>
+            </div>
+            <div class="weak-spots-list" id="weakSpotsList">
+              <!-- Dynamically populated weak spot bars -->
+            </div>
+          </div>
+
+          <!-- Right: Active Sheets Quick Selector -->
+          <div class="instructor-card">
+            <div class="card-header">
+              <h3 data-i18n="analytics_active_sheet">Select Lab Sheet to Inspect</h3>
+            </div>
+            <div class="form-group">
+              <select class="form-select" id="instructorSheetSelect">
+                <option value="MECH-2026">MECH-2026: General Physics I Practical</option>
+              </select>
+            </div>
+            <div class="sheet-meta-box" id="sheetMetaBox">
+              <p><strong>Title:</strong> General Physics I Practical</p>
+              <p><strong>Passing Score:</strong> 60%</p>
+              <div class="export-actions">
+                <a href="/api/instructor/sheet/MECH-2026/export-csv" class="btn btn-secondary btn-block" id="exportCsvBtn" download>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span data-i18n="btn_export_csv">Download Grade Roster (CSV / Excel)</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Submissions Roster Table -->
+        <div class="instructor-card table-card">
+          <div class="card-header">
+            <h3 data-i18n="submissions_roster">Student Submissions & Institutional Records</h3>
+            <span class="badge badge-secondary" id="submissionsCountBadge">5 Students</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="submissionsTable">
+              <thead>
+                <tr>
+                  <th data-i18n="th_name">Student Name</th>
+                  <th data-i18n="th_email">Email</th>
+                  <th data-i18n="th_score">Score</th>
+                  <th data-i18n="th_status">Status</th>
+                  <th data-i18n="th_date">Submission Date</th>
+                </tr>
+              </thead>
+              <tbody id="submissionsTableBody">
+                <!-- Dynamically loaded -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- TAB 5: SNAP & SIMULATE (AI VISION SCANNER) -->
+    <!-- ============================================================= -->
+    <section class="tab-pane" id="pane-vision">
+      <div class="section-container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" data-i18n="vision_title">Snap & Simulate: Physics Problem Vision Scanner</h2>
+            <p class="section-subtitle" data-i18n="vision_sub">Upload an image of a handwritten or textbook mechanics problem. AI automatically extracts physical parameters and loads them into the Smart Solver.</p>
+          </div>
+        </div>
+
+        <div class="vision-grid">
+          <!-- Upload Area -->
+          <div class="vision-card">
+            <div class="dropzone" id="visionDropzone">
+              <input type="file" id="visionFileInput" accept="image/*" style="display:none;">
+              <div class="dropzone-content">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <h4 data-i18n="vision_drop_prompt">Drag & Drop Textbook Image Here</h4>
+                <p class="text-subtle" data-i18n="vision_drop_or">or click to browse from device</p>
+                <button class="btn btn-secondary btn-sm" id="browseVisionBtn" data-i18n="btn_browse_files">Browse Files</button>
+              </div>
+            </div>
+
+            <!-- Demo sample problems for immediate one-click testing -->
+            <div class="sample-problems-box">
+              <span class="text-subtle" data-i18n="vision_quick_samples">Or test with pre-analyzed textbook scans:</span>
+              <div class="sample-chips">
+                <button class="btn-chip" data-sample-idx="0">📐 Inclined Ramp with Friction (35°)</button>
+                <button class="btn-chip" data-sample-idx="1">🚀 Projectile Launch (30 m/s)</button>
+                <button class="btn-chip" data-sample-idx="2">⚖️ Newton's 2nd Law Force (35 N)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vision Extraction Results -->
+          <div class="vision-card">
+            <div class="card-header">
+              <h3 data-i18n="vision_extracted_header">Extracted Mechanics Parameters</h3>
+              <span class="badge badge-primary" id="visionEngineBadge">Ready</span>
+            </div>
+
+            <div class="vision-results-body" id="visionResultsBody">
+              <div class="empty-state">
+                <p data-i18n="vision_no_image">No image analyzed yet. Upload a photo or select a sample above.</p>
+              </div>
+            </div>
+
+            <div class="vision-actions" id="visionActions" style="display:none;">
+              <button class="btn btn-emerald btn-block" id="sendVisionToSolverBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span data-i18n="btn_load_vision_solver">Load Parameters Into Smart Solver</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================= -->
+  <!-- MODALS -->
+  <!-- ============================================================= -->
+
+  <!-- 1. Mandatory Academic Authentication Gate Modal -->
+  <div class="modal-backdrop auth-gate-backdrop" id="authModal" style="display:none;">
+    <div class="modal-card auth-modal-card">
+      <!-- <div class="auth-gate-header">
+        <div class="brand auth-brand">
+          <div class="brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M3 12h3M18 12h3M12 3v3M12 18v3"></path>
+              <path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="auth-title" data-i18n="auth_gate_title">Academic Authentication Gate</h3>
+            <p class="auth-subtitle" data-i18n="auth_gate_sub">Sign in to sync your level stars and practical lab assessments.</p>
+          </div> 
+        </div> -->
+      </div>
+
+      <!-- Tab Switcher (State 1: Login, State 2: Register) -->
+      <div class="auth-nav-tabs" id="authNavTabs">
+        <button class="auth-tab active" id="authTabLogin" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+          <span data-i18n="tab_signin">Sign In</span>
+        </button>
+        <button class="auth-tab" id="authTabRegister" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          <span data-i18n="tab_register">Create Account</span>
+        </button>
+      </div>
+
+      <!-- Global Alert / Status Box -->
+      <div class="auth-alert" id="authAlertBox" style="display:none;"></div>
+
+      <!-- ============================================== -->
+      <!-- STATE 1: LOGIN -->
+      <!-- ============================================== -->
+      <div class="auth-state-pane active" id="authStateLogin">
+        <form id="loginForm" onsubmit="return false;" class="auth-form">
+          <div class="form-group">
+            <label for="loginEmail" data-i18n="label_email">Institutional Email:</label>
+            <input type="email" class="form-input" id="loginEmail" placeholder="id@university.edu.eg" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword" data-i18n="label_password">Password:</label>
+            <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+          <div class="auth-actions">
+            <button class="btn btn-primary btn-block btn-lg" id="submitLoginBtn" type="submit">
+              <span class="btn-text" data-i18n="btn_signin_submit">Sign in</span>
+              <div class="spinner-sm" style="display:none;"></div>
+            </button>
+          </div>
+          <div class="auth-switch-link">
+            <span data-i18n="auth_no_account">Don't have an account?</span>
+            <button type="button" class="btn-link" id="switchToRegisterLink" data-i18n="tab_register">Create Account</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- STATE 2: CREATE ACCOUNT -->
+      <!-- ============================================== -->
+      <div class="auth-state-pane" id="authStateRegister" style="display:none;">
+        <form id="registerForm" onsubmit="return false;" class="auth-form">
+          <div class="form-group">
+            <label data-i18n="label_role">Your academic role:</label>
+            <div class="role-selector">
+              <label class="radio-label">
+                <input type="radio" name="registerRole" value="student" checked>
+                <span data-i18n="role_student">Student </span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="registerRole" value="instructor">
+                <span data-i18n="role_instructor">Instructor </span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registerFullName" data-i18n="label_full_name">Full Name:</label>
+            <input type="text" class="form-input" id="registerFullName" placeholder="Enter your nmae" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail" data-i18n="label_email">Institutional Email:</label>
+            <input type="email" class="form-input" id="registerEmail" placeholder="id@university.edu" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="registerPassword" data-i18n="label_password">Password (min 6 characters):</label>
+            <input type="password" class="form-input" id="registerPassword" placeholder="Enter your password" required minlength="6" autocomplete="new-password">
+          </div>
+          <div class="auth-actions">
+            <button class="btn btn-primary btn-block btn-lg" id="submitRegisterBtn" type="submit">
+              <span class="btn-text" data-i18n="btn_register_submit">Create Account </span>
+              <div class="spinner-sm" style="display:none;"></div>
+            </button>
+          </div>
+          <div class="auth-switch-link">
+            <span data-i18n="auth_have_account">Already have an account?</span>
+            <button type="button" class="btn-link" id="switchToLoginL
+          </div>
+        </form>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- STATE 3: ENTER 6-DIGIT EMAIL OTP -->
+      <!-- ============================================== -->
+
+      <div class="auth-state-pane" id="authStateOtp" style="display:none;">
+        <div class="otp-verification-card">
+          <div class="otp-header-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </div>
+          <h4 class="otp-title" data-i18n="otp_title">Enter 6-Digit Email OTP</h4>
+          <p class="otp-desc">
+            <span data-i18n="otp_desc">A 6-digit verification code was dispatched to:</span><br>
+            <strong id="otpTargetEmailText" class="otp-email-highlight">user@university.edu</strong>
+          </p>
+
+          <form id="otpForm" onsubmit="return false;" class="auth-form">
+            <div class="form-group text-center">
+              <input type="text" class="form-input otp-code-input" id="otpCodeInput" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" placeholder="••••••" autocomplete="one-time-code" required autofocus>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="otp-countdown-row">
+              <div class="otp-timer-box" id="otpTimerBox">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span data-i18n="otp_expires_in">Code expires in:</span>
+                <strong id="otpCountdownText">05:00</strong>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" id="resendOtpBtn" disabled>
+                <span class="btn-text" data-i18n="btn_resend_otp">Resend Code</span>
+                <div class="spinner-sm" style="display:none;"></div>
+              </button>
+            </div>
+
+            <div class="auth-actions">
+              <button class="btn btn-primary btn-block btn-lg" id="submitOtpBtn" type="submit">
+                <span class="btn-text" data-i18n="btn_verify_otp">Verify OTP & Launch Platform</span>
+                <div class="spinner-sm" style="display:none;"></div>
+              </button>
+            </div>
+
+            <div class="auth-switch-link">
+              <button type="button" class="btn-link" id="otpBackToLoginBtn" data-i18n="btn_back_auth">← Back to Sign In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. AI Tutor Step-by-Step Modal -->
+  <div class="modal-backdrop" id="aiTutorModal" style="display:none;">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-with-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <h3 data-i18n="modal_ai_title">AI Physics Professor & Pedagogical Guide</h3>
+          <span class="badge badge-primary" id="aiTutorEngineBadge">Gemini AI</span>
+        </div>
+        <button class="modal-close" id="closeAiModalBtn">×</button>
+      </div>
+      <div class="modal-body" id="aiTutorContent">
+        <div class="loading-spinner-box">
+          <div class="spinner"></div>
+          <p data-i18n="ai_calculating">Synthesizing step-by-step mathematical explanation...</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="closeAiModalFooterBtn" data-i18n="btn_close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Create Lab Sheet Modal (Instructor) -->
+  <div class="modal-backdrop" id="createSheetModal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 data-i18n="modal_create_sheet_title">Generate Anti-Cheat Lab Sheet</h3>
+        <button class="modal-close" id="closeCreateSheetModalBtn">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label data-i18n="label_sheet_code">Unique Sheet Code (e.g. MECH-FALL26):</label>
+          <input type="text" class="form-input text-bold" id="newSheetCodeInput" placeholder="MECH-FALL26">
+        </div>
+        <div class="form-group">
+          <label data-i18n="label_sheet_title">Sheet Title:</label>
+          <input type="text" class="form-input" id="newSheetTitleInput" placeholder="Midterm Mechanics Practical Examination">
+        </div>
+        <div class="form-group">
+          <label data-i18n="label_passing_score">Passing Threshold (%):</label>
+          <input type="number" class="form-input" id="newSheetPassInput" value="60" min="40" max="100">
+        </div>
+        <div class="form-group">
+          <label data-i18n="label_select_topics">Included Physics Topics:</label>
+          <div class="topic-checkboxes">
+            <label><input type="checkbox" name="sheetTopic" value="newton" checked> Newton's 2nd Law</label>
+            <label><input type="checkbox" name="sheetTopic" value="projectiles" checked> Projectile Trajectory</label>
+            <label><input type="checkbox" name="sheetTopic" value="inclined_plane" checked> Inclined Plane & Friction</label>
+            <label><input type="checkbox" name="sheetTopic" value="vectors" checked> Orthogonal Vectors</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-block" id="submitCreateSheetBtn" data-i18n="btn_create_sheet_submit">Deploy Lab Sheet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+              
